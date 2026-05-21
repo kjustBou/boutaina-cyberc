@@ -4,7 +4,7 @@
 --
 #Mission 02
 --
-##ExécUTION DE ps aux et identification des 3 processus qui consomment le plus de CPU
+##Exécution de ps aux et identification des 3 processus qui consomment le plus de CPU
 --
 >ps aux --sort=-%cpu | head -n 4
 >nano rapport-semaine-6.md  
@@ -15,7 +15,7 @@ USER        PID    %CPU    %MEM    VSZ     RSS   TTY    STAT START   TIME COMMAN
 **kbou**   35103  **0.9**  2.2  2894156   352516   ?       Sl  17:57   0:05 /usr/bin/nautilus --gapplication-service  
 --
 ##Identification du processus le plus gourmand depuis htop   
-![Capture d'exécution d'htop](hotp.png)  
+![Capture d'exécution d'htop](htop.png)  
 --
 lancer htop
 F6 == Sort by : PERCENT_CPU.
