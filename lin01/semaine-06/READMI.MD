@@ -8,7 +8,7 @@
 puis on procède avec différentes commandes qui vont aller chercher différentes infos:  
 ---
 -on identifie les utilisateurs du dossier home    
->au début j'ai utilisé **ls /home" mais ça m'afficher deux utilisateurs kbou et un autre fichier .log, mais pour filtrer et ne garder que les dossiers j'ai utilisé **ls -d /home/*/**    
+>au début j'ai utilisé **ls /home** mais ça m'afficher deux utilisateurs kbou et un autre fichier .log, mais pour filtrer et ne garder que les dossiers j'ai utilisé **ls -d /home/*/**    
 ---
 -vérification du service ssh    
 > en 2 commandes **systemctl list-units --type=service | grep ssh** ou version plus simple **systemctl is-active ssh**    
