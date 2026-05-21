@@ -65,6 +65,32 @@ default via 10.0.2.2 dev enp0s3 proto dhcp src 10.0.2.15 metric 100
 10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 metric 100
 --
 je dirais que la passerelle est via l'adresse 10.0.2.2 par l'entremise de la 'carte réseau' mise en place par la VM: interface enp0s3  
-++réseau local de la VM :
-IP : 10.0.2.15
-réseau : 10.0.2.0/24
+++réseau local de la VM :  
+IP : 10.0.2.15  
+réseau : 10.0.2.0/24  
+--
+>ping -c 4 8.8.8.8  
+cette commande teste la connexion internet brute  
+le résultat nous donne ces informations:  
+4 packets transmitted, 4 received, 0% packet loss, time 3003ms  
+rtt min/avg/max/mdev = 12.105/19.451/34.351/9.002 ms  
+=cela indique que nous avons transmis et reçus 4 paquets avec succès sans aucune perte, 0% indique une connexion stable entre la machine et le serveur avec une latence  moyenne de 19.45ms avec une variation assez minime de 9ms  
+++Le ping indique 56(84) bytes : 56 bytes de données ICMP envoyées, et 84 bytes une fois les en‑têtes IP et ICMP ajoutés, ce qui correspond à la taille réelle du paquet transmis sur le réseau.  
+
+>ping -c 4 google.com  
+cette commande teste le DNS (domain name system) en plus d'internet (le DNS permet de traduire un mot en une adresse IP  
+le résultat indique :   
+4 packets transmitted, 4 received, 0% packet loss, time 3010ms  
+rtt min/avg/max/mdev = 16.663/23.092/28.986/5.852 ms  
+Durée totale du test=3010ms  
+64 bytes from tzyula-ab-in-f14.1e100.net (142.250.69.142): icmp_seq=3 ttl=255 time=16.7 ms  
+
+ON voit aussi que google.com a été interprétée en adresse IP (142.250.69.142) donc DNS OK;
+
+>curl ifconfig.me  
+résultat:  
+kbou@UbuntuBou:~/boutaina-cyberc/lin01/semaine-06$ curl ifconfig.me  
+24.48.87.38kbou@UbuntuBou:~/boutaina-cyberc/lin01/semaine-06$  
+cette commande indique mon adresse IP publique 24.48.87.38, celle fournie par notre fournisseur internet  
+
+
