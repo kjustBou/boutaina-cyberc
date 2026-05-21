@@ -4,7 +4,7 @@
 ---
 -ce script doit se lancer et nous donner un rapport général sur le système en cours   
 ---
-d'abord, on commence par dater cet audit, en créant des variables pour la date et la machine en question  
+-d'abord, on commence par dater cet audit, en créant des variables pour la date et la machine en question  
 puis on procède avec différentes commandes qui vont aller chercher différentes infos:  
 ---
 -on identifie les utilisateurs du dossier home    
