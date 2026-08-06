@@ -1,6 +1,10 @@
 
 body{ 
-    display: flex;
-    flex-direction: ;
+    display: flex; /*contenu en rangée */
+    flex-flow: row wrap;
+    flex-direction: 
+}
+#flexdiv p {
+    flex:
 
 }

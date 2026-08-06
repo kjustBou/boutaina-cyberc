@@ -1,0 +1,30 @@
+/*
+Liste des disciplines 
+
+Liste des coaches
+
+
+
+
+
+*/
+
+
+allez cherchez un horaire avec un api 
+[
+    {
+        "discipline": "MUAI THAI",
+        "philosophy": "",
+
+    }
+    {
+        "discipline": "JIU JITSU", 
+        "philosophy":"",
+    }
+
+    {
+        "discipline": "KICK-BOXING", 
+        "philosophy":"",
+
+    }
+]

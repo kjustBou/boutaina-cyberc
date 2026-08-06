@@ -1,24 +1,41 @@
-
-/*This is a comment*/
-
 /*@import url(<i class="fa-light fa-hand-holding-star"></i>);*/
+
+
 :root{
     font-size: 20px;
 }
 
 body{
-    background-color: #B9D9EB;
-    margin: 0;        
-    padding: 0;
+    background-color: #eeeefa;
+    margin: 10%;
+    border: 10%        
+    padding: 5%;
     font-family: Arial, sans-serif;
 }
 
 /*Style a heading*/
 h1{
-    color: #003262;
-    text-align: left;
+    color: #f5574b;
+    text-align: center;
 }
 h2{ 
    color: #2072AF
+
+}
+
+label[nom=]
+
+header{
+    width:70%;
+    margin:auto;
+}
+
+.formulaire{
+    border: 1px solid #333;  /*créée une bordure*/
+
+    
+    flex-direction: column
+
+
 
 }

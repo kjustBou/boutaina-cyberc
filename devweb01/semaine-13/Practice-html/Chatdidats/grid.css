@@ -1,0 +1,34 @@
+.block {
+    width:100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+}
+
+
+.section-block {
+    height: 100px;
+
+    display: grid;
+    /*grid-template-columns: 1fr 1fr 1fr 1fr;*/
+    grid-template-areas:
+      'header header header header header header';
+      'menu    main  main   main   main   main';
+
+    
+}
+.item1 {
+    grid-area: header;
+}
+
+
+
+.item {
+    grid-column: 1/ span 2;
+    /*=grid-column-start: 1; 
+    grid-column-end: 3;
+    je peux faire la même chose avec les rangées, on peut combiner les deux*/
+    grid-row: 1 /span 2;
+}
+
+
+
