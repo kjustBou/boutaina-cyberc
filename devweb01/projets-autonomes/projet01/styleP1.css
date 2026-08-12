@@ -19,6 +19,49 @@
   
   box-sizing: border-box;
 }
+
+/*NEW*/
+/*HEADER*/
+.logo-DJB {
+    width:100px;
+    height: auto;
+}
+
+
+
+
+
+/* HERO SECTION */
+.menu {
+    display: none;
+}
+.menuButton {
+    display: none;
+}
+
+.menuButton.open {
+    display: flex;
+}
+
+.bouton-cta {
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*old
 body {
     background-color: #D1E8FF;
 }
@@ -68,16 +111,12 @@ nav a {
     gap: 50px;
 }
 
-.bouton-cta {
-    
+.hero-cta {
+    display: inline-block;
+    border-radius: 3px;
+    padding: 12px 24px;
+    border-radius: 8px;
 }
-.hero-text {
-
-    
-
-}
-
-
 
 
 .desktop {
@@ -92,7 +131,7 @@ nav a {
 
 a {
     font-size: 30px;
-    /*margin-inline: 20px;*/
+    margin-inline: 20px;
 
 }
 
@@ -118,3 +157,4 @@ a {
     
     }
 }
+ */
