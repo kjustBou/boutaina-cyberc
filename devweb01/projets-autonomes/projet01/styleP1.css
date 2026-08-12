@@ -1,0 +1,160 @@
+:root {
+  /* COULEURS PRINCIPALES */
+  --couleur-texte:        #E10600;
+  --couleur-accent:       #0057B8;
+  --couleur-secondaire:   #0A0A0A;
+  --couleur-fond-clair:   #eeeeee;
+  --couleur-fond-fonce:   #A9A9A9;
+  --couleur-blanc:        #FFFFFF;
+
+  /* COULEURS DE SUPPORT */
+  --couleur-fond-alt:     #F2E8DC;
+  --couleur-texte-doux:   #7A4A2E;
+  --couleur-bordure:      rgb(4, 54, 195) ;
+  --couleur-sombre:       #1A1A18; 
+
+  /* TYPOGRAPHIES */
+  --typo-titre:   'IBM Plex Serif', serif;
+  --typo-corps:   'IBM Plex Sans', sans-serif;
+  
+  box-sizing: border-box;
+}
+
+/*NEW*/
+/*HEADER*/
+.logo-DJB {
+    width:100px;
+    height: auto;
+}
+
+
+
+
+
+/* HERO SECTION */
+.menu {
+    display: none;
+}
+.menuButton {
+    display: none;
+}
+
+.menuButton.open {
+    display: flex;
+}
+
+.bouton-cta {
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*old
+body {
+    background-color: #D1E8FF;
+}
+
+
+header {
+
+    display: flex;
+    justify-content: space-around;
+    align-items:flex-start;
+    background-color: var(--couleur-fond-clair);
+    border-bottom: var(--couleur-bordure) ;
+    padding-left: 0;
+}
+
+header img {
+    margin-left: 0px;
+    height: 92px;
+    width: auto;
+
+}
+
+nav {
+    display: grid;
+    gap: 30px;
+    
+} 
+
+hero {
+    background-image: url("/projets-autonomes/Img/arena.jpg");
+    background-size: cover;
+    background-attachment: scroll;
+
+}
+
+nav a {
+    cursor: auto;
+    color: var(--couleur-fond-fonce);
+    text-decoration: wavy;
+
+}
+
+.hero-contenu { 
+    margin:30%;
+    display: grid;
+
+    gap: 50px;
+}
+
+.hero-cta {
+    display: inline-block;
+    border-radius: 3px;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+
+.desktop {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.phone {
+    display: none;
+}
+
+a {
+    font-size: 30px;
+    margin-inline: 20px;
+
+}
+
+@media (max-width: 640px) {
+    a {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 430px){
+    a {
+        font-size: 16px ;
+    }
+    
+
+    .desktop {
+        display: none;
+
+    }
+    .phone {
+        display: flex;
+        flex-direction: column;
+    
+    }
+}
+ */
