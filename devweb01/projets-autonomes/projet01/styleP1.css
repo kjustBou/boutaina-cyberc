@@ -1,3 +1,9 @@
+*, 
+*::after,
+*::before {
+    box-sizing:border-box;
+}
+
 :root {
   /* COULEURS PRINCIPALES */
   --couleur-texte:        #E10600;
@@ -18,20 +24,53 @@
   --typo-corps:   'IBM Plex Sans', sans-serif;
   
   box-sizing: border-box;
+
+  --bar-width:60px;
+  --bar-height: 8px;
+  --hambuger-gap: 6px;
+  --foreground: #333; 
+  --background: white;
+}
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--hambuger-gap);
+    background-color: red;
+    width: max-content;
+    position:relative;
+    z-index: 2;
+    cursor: pointer
+
+
 }
 
-/*NEW*/
-/*HEADER*/
-.logo-DJB {
-    width:100px;
-    height: auto;
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input {
+    content:"";
+    width: var(--bar-width);
+    height: var(--bar-height);
+    background-color: var(--foreground);
+    border-radius: 9999px;
 }
 
+.hamburger-menu input {
+    appearance: none;
+    padding:0;
+    margin:0;
+    outline: none;
+    pointer-events: none;
+}
+
+/*.hamburger-menu input:checked {
+    background-color: red;
+}*/
+
+/*NEW
+HEADER
 
 
-
-
-/* HERO SECTION */
+HERO SECTION
 .menu {
     display: none;
 }
@@ -50,18 +89,7 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*old
+//old
 body {
     background-color: #D1E8FF;
 }
@@ -88,6 +116,7 @@ nav {
     display: grid;
     gap: 30px;
     
+
 } 
 
 hero {
@@ -116,10 +145,72 @@ nav a {
     border-radius: 3px;
     padding: 12px 24px;
     border-radius: 8px;
+}*/
+
+
+body {
+    margin:0;
+}
+
+:root {}
+
+
+.logo-DJB {
+    margin: 0%;
+    height: 92px;
+    width: auto;
+    object-fit:cover
+    
+}
+header {
+    display: flex;
+    justify-content:space-between;
+    max-height:92px;
+    background-color:#d0dbe2;
+    object-fit: contain;
 }
 
 
-.desktop {
+    
+
+
+.hero {
+    height: 900px;
+    margin:50%;
+    background-image: url(/projets-autonomes/assets/images/arena.jpg);
+    background-color:#A9A9A9
+
+}
+
+
+.about {
+
+}
+
+.disciplines {
+
+}
+
+.coach-card {
+
+}
+
+.card-front {
+
+}
+.card-front img {
+    background-image: url();
+    background-size: cover;
+    background-position: center;
+
+}
+
+.card
+
+
+
+
+/*.desktop {
     display: flex;
     justify-content: space-evenly;
 
@@ -156,5 +247,4 @@ a {
         flex-direction: column;
     
     }
-}
- */
+}*/
