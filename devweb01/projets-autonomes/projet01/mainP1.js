@@ -40,16 +40,17 @@ function init() {
 
 init();*/
 
-
-
 "use strict";
+
+//const { mainModule } = require("node:process");
+
 console.log("Javascript chargé !");
 
 
 //HEADER (SOUS-FONCTIONS ET FONCTION PRINCIPALE)(Logo, nom et menu déroulant)  
 
 //LOGO
-function createLogo() {
+/*function createLogo() {
   const logo = document.createElement("img");
 
   logo.src = "../assets/logos/logoDJB-cropped.png";
@@ -58,36 +59,35 @@ function createLogo() {
   logo.href = "index.html";
 
   return logo;
-}
+}*/
 
 //Menu déroulant
-function createMenuButton() {
+/*function createMenuButton() {
   const menuButton = document.createElement("button"); 
   menuButton.textContent = "☰";
 
   menuButton.addEventListener("click", function() {
   menuButton.classList.toggle("open");
 });
-  return menuButton;
 
-}
+  return menuButton;
+}*/
 
 function createHeader() {
   const header = document.querySelector("header")
 
-  const logo = createLogo();
+  const logo = document.getElementById(".logo-DJB")
 
-  const title = document.createElement("h1");
+  const title = document.querySelector("h1");
   title.textContent = "The Double Jab Studio";
 
-  const menuButton = createMenuButton();
+  //const menuButton = createMenuButton();
   
   header.appendChild(logo);
   header.appendChild(title);
-  header.appendChild(menuButton);
-
-  return header;
   
+  return header;
+
 }
 
   document.body.appendChild(createHeader());
@@ -99,8 +99,7 @@ function createHero() {
 
   const main = document.querySelector("main");
 
-  const hero = document.createElement("section");
-  hero.classList.add("hero");
+  const hero = document.querySelector("hero");
   
   const title = document.createElement("h1");
   title.textContent = "DJB";
@@ -121,8 +120,9 @@ function createHero() {
   
   return hero;
 }
-
+  
   document.body.appendChild(createHero());
+
 
 function createAbout() {
   const about = document.createElement("section");
@@ -143,18 +143,16 @@ function createAbout() {
   document.body.appendChild(createAbout());
 
 
-  
+//FOOTER 
+
   function createFooter() {
 
   const footer = document.querySelector("footer");
     
   const logo = createLogo();
 
-  const address = document.createElement("div");
-  address.classList.add("address");
+  const address = document.querySelector(".address");
   address.innerHTML = "Bonjour";
-  footer.appendChild(address);
-
 
   const addressTitle = document.createElement("h3");
   addressTitle.textContent = "Visit Us";
@@ -164,10 +162,14 @@ function createAbout() {
   
   const map = document.createElement("iframe");
   map.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7911.625930825244!2d-73.54622606519816!3d45.48627615247755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a8c179af69b%3A0xc619bc40654dd5fe!2sEspace%20VERRE!5e0!3m2!1sfr!2sca!4v1786561237122!5m2!1sfr!2sca";
-  
+  map.classList.add("location");
+
+  //footer.appendChild(address);
+
   return footer;
 }
 
-createFooter();
+
+
 
 
