@@ -13,10 +13,22 @@
 </head>
 
 <body>
-    <header> <!--Contient logo, nom et menu humb-->
-        <img class="logo-DJB" src="/projets-autonomes/assets/logos/logoDJB-cropped.png">
+    <header> 
+        <a href="index.html"> </a> <!--Contient logo, nom et menu humb-->
+           <img class="logo-DJB" src="/projets-autonomes/assets/logos/logoDJB-cropped.png" alt="DJB Studio">
+        
         <h1></h1>
-        <label class="hamburger-menu">
+
+        <button class="menu-button">☰</button>
+
+        <nav class="menu">
+            <a href="indexP1.html">About</a>
+            <a href="#disciplines">Disciplines</a>
+            <a href="#coaches">Coaches</a>
+            <a href="schedule.html">Schedule</a>
+            <a href = "joinUsP1.html">Join-us</a>
+        </nav>
+        <!--<label class="hamburger-menu">
             <input type="checkbox">
         </label>
         <aside class="sidebar">
@@ -27,21 +39,25 @@
                 <div>Schedule</div>
                 <div>Join-Us</div>
             </nav>
-        </aside>
-
+        </aside> -->
     </header>
 
     <main>
-        <hero> <!--Contient h2,h2 et cta en a --></hero>
+        <section class="hero">
+            <h1>DJB</h1>
+            <h2> The place to be</h2>
+            <a class="button-cta" href="joinUsP1.html">COME TRAIN WITH US</a>
+        </section>
 
-        <div class="about"></div>
+        <section class="about"></section>
 
-        <div class="disciplines"></div>
 
-        <div class="coach-card"></div>
-           <div class="card-front"></div>
-           
+        <section class="disciplines" id="disciplines"></section>
 
+        <section class="coaches" id="coaches"></section>
+
+        
+        
     </main>
     
     <footer>
