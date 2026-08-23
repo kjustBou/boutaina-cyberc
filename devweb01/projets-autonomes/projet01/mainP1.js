@@ -47,41 +47,27 @@ init();*/
 console.log("Javascript chargé !");
 
 
-//HEADER (SOUS-FONCTIONS ET FONCTION PRINCIPALE)(Logo, nom et menu déroulant)  
+//HEADER (Logo, et menu nav déroulant)  
 
-//LOGO
-/*function createLogo() {
-  const logo = document.createElement("img");
 
-  logo.src = "../assets/logos/logoDJB-cropped.png";
-  logo.alt = "The DJB Studio";
-  logo.classList.add("logo-DJB");
-  logo.href = "index.html";
 
-  return logo;
-}*/
 
-//Menu déroulant
-/*function createMenuButton() {
-  const menuButton = document.createElement("button"); 
-  menuButton.textContent = "☰";
 
-  menuButton.addEventListener("click", function() {
-  menuButton.classList.toggle("open");
+  const menuButton = document.querySelector(".menu-button");
+  const menu = document.querySelector(".menu");
+
+  menuButton.addEventListener("click", () => {
+    menu.classList.toggle("open");
 });
 
-  return menuButton;
-}*/
 
-function createHeader() {
+
+
+/*function createHeader() {
   const header = document.querySelector("header")
 
   const logo = document.getElementById(".logo-DJB")
 
-  const title = document.querySelector("h1");
-  title.textContent = "The Double Jab Studio";
-
-  //const menuButton = createMenuButton();
   
   header.appendChild(logo);
   header.appendChild(title);
@@ -167,7 +153,7 @@ function createAbout() {
   //footer.appendChild(address);
 
   return footer;
-}
+}*/
 
 
 
