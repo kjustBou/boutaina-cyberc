@@ -8,13 +8,13 @@
                         "name":"Wrestling",
                         "tagline":"Control the fight.",
                         "description":"Wrestling is the art of control, balance, and determination. It teaches athletes how to dictate where the fight takes place through powerful takedowns, positional dominance, and relentless pressure. At its core, wrestling develops discipline, resilience, and the mindset to never give up an advantageous position.",
-                        "img": "Null"
+                        "img": "https://res.cloudinary.com/fdssm8mg/image/upload/v1787171174/image_1.jpg"
                         },
                 
                         {
                         "name": "MUAI THAI",
                         "tagline": "Strike with power and precision.",
-                        "philosophy": "Known as the 'Art of Eight Limbs', Muay Thai combines punches, kicks, elbows, and knees into a powerful striking system. Its philosophy is rooted in respect, courage, and composure under pressure. Muay Thai teaches practitioners to remain calm, strike with precision, and develop both physical toughness and mental fortitude.",
+                        "description": "Known as the 'Art of Eight Limbs', Muay Thai combines punches, kicks, elbows, and knees into a powerful striking system. Its philosophy is rooted in respect, courage, and composure under pressure. Muay Thai teaches practitioners to remain calm, strike with precision, and develop both physical toughness and mental fortitude.",
                         "img": "https://res.cloudinary.com/fdssm8mg/image/upload/v1787160369/muay-thai-chute-485065389.jpg"
                 
                         },
@@ -22,73 +22,68 @@
                         {
                         "name": "BRAZILIAN JIU-JITSU", 
                         "tagline": "Technique over strength.",
-                        "philosophy":"Brazilian Jiu-Jitsu is the art of using technique and leverage over strength. It emphasizes problem-solving, patience, and adaptability, allowing a smaller person to overcome a larger opponent through superior positioning and submissions. The philosophy of BJJ is built on continuous learning, humility, and efficiency.",
-                        "img": "Null"
+                        "description":"Brazilian Jiu-Jitsu is the art of using technique and leverage over strength. It emphasizes problem-solving, patience, and adaptability, allowing a smaller person to overcome a larger opponent through superior positioning and submissions. The philosophy of BJJ is built on continuous learning, humility, and efficiency.",
+                        "img": "https://res.cloudinary.com/fdssm8mg/image/upload/v1787171174/image_2.jpg"
                         },
                 
                         {
                         "name": "KICK-BOXING", 
                         "tagline":"Speed, power, and movement.",
-                        "philosophy":"Kickboxing blends the speed and precision of boxing with the power and versatility of kicks. It promotes discipline, confidence, and self-control while developing effective stand-up fighting skills. The philosophy behind kickboxing is to create a balanced athlete who can move fluidly, strike decisively, and maintain focus under pressure.",
-                        "img": "Null"
+                        "description":"Kickboxing blends the speed and precision of boxing with the power and versatility of kicks. It promotes discipline, confidence, and self-control while developing effective stand-up fighting skills. The philosophy behind kickboxing is to create a balanced athlete who can move fluidly, strike decisively, and maintain focus under pressure.",
+                        "img": "https://res.cloudinary.com/fdssm8mg/image/upload/v1787171175/image_4.jpg"
                         }
                     ],
 
-                    "coaches":[
+                    "coaches": [
                         {
-                            "id" : "coach_001",
                             "name" : "Aiden Brooks", 
-                            "years_of_experience" : 12,
-                            "session_type" : "Private",
+                            "experience" : 12,
+                            "session" : "Private",
                             "discipline" : "Wrestling",
-                            "image_url" : ""
+                            "img" : ""
                         },
                 
                         {
-                            "id" : "coach_002",
                             "name" : "Maya Tanaka", 
-                            "years_of_experience" : 8,
-                            "session_type" : "Group",
+                            "experience" : 8,
+                            "session" : "Group",
                             "discipline" : "Muay-Thai",
-                            "image_url" : ""
+                            "img" : ""
                 
                         },
                         {
-                            "id" : "coach_003",
                             "name" : "Lucas Ferreira", 
-                            "years_of_experience" : 10,
-                            "session_type" : "Private",
+                            "experience" : 10,
+                            "session" : "Private",
                             "discipline" : "Bjj no-gi",
-                            "image_url" : ""
+                            "img" : ""
                         },
                 
                         {
-                            "id" : "coach_004",
                             "name" : "Selena Ortiz", 
-                            "years_of_experience" : 6,
-                            "session_type" : "Group",
+                            "experience" : 6,
+                            "session" : "Group",
                             "discipline" : "Kick-Boxing",
-                            "image_url" : ""
+                            "img" : ""
                         },
                 
                         {
-                            "id" : "coach_005",
                             "name" : "Noah Rasmussen", 
-                            "years_of_experience" : 15,
-                            "session_type" : "Private",
+                            "experience" : 15,
+                            "session" : "Private",
                             "discipline" : "Muay-Thai",
-                            "image_url" : "/assets/images?"
+                            "img" : ""
                         },
                         
                         {
-                            "id" : "coach_006",
                             "name" : "Jade Moreau", 
-                            "years_of_experience" : 7,
-                            "session_type" : "Group",
+                            "experience" : 7,
+                            "session" : "Group",
                             "discipline" : "Bjj no-gi",
-                            "image_url" : ""
+                            "img" : ""
                         }
                     ]
                 }
+
 
 }
