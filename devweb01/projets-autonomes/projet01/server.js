@@ -25,10 +25,27 @@ async function getApiInfo() {
         const coachesContainer = document.querySelector(".coaches-container");
         console.log(coachesContainer);
     
+        /*const disciplinesIntro = document.createElement("div");
+        disciplinesIntro.classList.add("discipline-intro");
+
+        disciplinesContainer.appendChild(disciplinesIntro);
+
+        const disciplinesAction = document.createElement("h1");
+        disciplinesAction.classList.add("disciplines-action");
+        disciplinesAction.textContent = "Discover our disciplines";
+
+        disciplinesIntro.appendChild(disciplinesAction);
+        
+        const discipSpan = document.createElement("span");
+        discipSpan.classList.add("discipline-span");
+        discipSpan.textContent = "Click on each card to learn more";
+
+        disciplinesIntro.appendChild(discipSpan);
+
         const coachIntro = document.createElement("h1");
-            coachIntro.classList.add("coach-intro");
-            coachIntro.textContent = "Come meet our team of instructors";
-            coachesContainer.appendChild(coachIntro);
+        coachIntro.classList.add("coach-intro");
+        coachIntro.textContent = "Come meet our team of instructors";
+        coachesContainer.appendChild(coachIntro);*/
 
         function afficherData(disciplines, coaches) {
 

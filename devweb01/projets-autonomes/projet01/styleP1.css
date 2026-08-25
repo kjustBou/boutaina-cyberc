@@ -80,7 +80,7 @@ header {
 }
 
 .hero-wrapper {
-    background-image: url(/projets-autonomes/assets/images/arena.jpg);
+    background-image: url(../assets/images/arena.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -213,6 +213,10 @@ header {
     object-fit: cover;
 }
 
+.joinUs {
+    padding-top: 150px;
+    color: white;
+}
 
 /*.desktop {
     display: flex;
