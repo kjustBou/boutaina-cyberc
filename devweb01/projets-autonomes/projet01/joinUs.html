@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join us</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <script src="mainP1.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">  <!--Contient logo, nom et menu humb-->
+           <img class="logo-DJB" src="../assets/logos/whiteLogo.png" alt="DJB Studio">
+        </a>
+        
+        <button class="menu-button" aria-label="Open menu"></button>
+
+        <nav class="menu">
+            <a href="index.html#about">About</a>
+            <a href="index.html#disciplines-container">Disciplines</a>
+            <a href="index.html#coaches-container">Coaches</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="joinUs.html">Join-us</a>
+        </nav>
+    </header>
+
+    <main class="joinUs">
+        <form id="join-form">
+            <h1>Join us for a free trial class and discover your strenghs</h1>
+
+            <label for="name">Full Name : </label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" autocomplete="name" minlength="2" maxlength="100" required>
+
+            <label for="phone">Phone Number : <span>(Optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <label for="email">Email : </label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="discipline">Discipline</label>
+            <select id="choice-discipline" name="discipline" required>
+                <option value="">Choose a discipline</option>
+                <option value="wrestling">Wrestling</option>
+                <option value="Jiu-Jitsu">BJJ gi</option>
+                <option value="BJJ no-gi">BJJ no-gi</option>
+                <option value="Muay Thai">Muay-Thai</option>
+                <option value="Kick-Boxing">Kick-Boxing</option>
+            </select>
+
+            <label for="message">Message : <span>(Optional)</span></label>
+            <textarea id="message" name="message" maxlength="500" placeholder="Tell us more about why the Martial Arts for you"></textarea>
+
+            <button type="submit">Submit</button>
+            <p id="form-response"></p>
+
+        
+    </form>
+    </mainn>
+   
+</body>
+</html>

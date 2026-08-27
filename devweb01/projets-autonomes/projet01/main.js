@@ -127,36 +127,42 @@ async function getApiInfo() {
 
                 coachesContainer.appendChild(coachCard);
 
-                /*const coachImage = document.createElement("img");
+                const coachImage = document.createElement("img");
                 coachImage.classList.add("coach-image");
                 coachImage.classList.add(`coach-image-${index +1}`);
-                coachImage.src = coach.image; 
+                coachImage.src = coach.img; 
 
-                coachCard.appendChild(coachImage);*/
+                coachCard.appendChild(coachImage);
+
+                const coachTextCard = document.createElement("div");
+                coachTextCard.classList.add("coach-text-card");
+                coachTextCard.classList.add(`coach-text-card-${index + 1}`);
+
+                coachCard.appendChild(coachTextCard);
 
                 const coachName = document. createElement("h3");
                 coachName.classList.add("coach-name");
                 coachName.classList.add(`coach-name-${index +1}`);
                 coachName.textContent = coach.name;
 
-                coachCard.appendChild(coachName);
+                coachTextCard.appendChild(coachName);
 
                 const coachExperience = document.createElement("span");
                 coachExperience.textContent = `${coach.experience} years of experience`;
 
-                coachCard.appendChild(coachExperience);
+                coachTextCard.appendChild(coachExperience);
 
                 const coachSession = document.createElement("span");
                 coachSession.classList.add("coach-session") ;
                 coachSession.textContent = `${coach.session} sessions`;
                 
-                coachCard.appendChild(coachSession);
+                coachTextCard.appendChild(coachSession);
 
                 const coachDiscipline = document.createElement("span");
                 coachDiscipline.classList.add("coach-discipline");
                 coachDiscipline.textContent = `Specialized in: ${coach.discipline}`;
 
-                coachCard.appendChild(coachDiscipline);
+                coachTextCard.appendChild(coachDiscipline);
 
             });
 
@@ -173,6 +179,18 @@ async function getApiInfo() {
     }
 }
 
+//JOIN US PAGE
 
+const form = document.querySelector("#join-form");
+const formResponse = document.querySelector("#form-response");
 
+/*form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
+    const data = new FormData(form);
+
+    const name = data.get("name").trim()
+    const email = get("email").trim();
+    const discipline = data.get("discipline");
+      
+      if (name.length < 2 || name.length > 100){}*/
