@@ -40,7 +40,7 @@
                             "experience" : 12,
                             "session" : "Private",
                             "discipline" : "Wrestling",
-                            "img" : "/assets/images/Aiden-Brooks.png"
+                            "img" : "/assets/images/aiden-brooks.png"
                         },
                 
                         {
@@ -48,7 +48,7 @@
                             "experience" : 8,
                             "session" : "Group",
                             "discipline" : "Muay-Thai",
-                            "img" : "/assets/images/Maya-Tanaka.png"
+                            "img" : "/assets/images/maya-tanaka.png"
                 
                         },
                         {
@@ -56,15 +56,15 @@
                             "experience" : 10,
                             "session" : "Private",
                             "discipline" : "Bjj no-gi",
-                            "img" : "assets/images/lucas-ferreira.png"
+                            "img" : "/assets/images/lucas-ferreira.png"
                         },
                 
                         {
-                            "name" : "Selena Ortiz", 
+                            "name" : "selena ortiz", 
                             "experience" : 6,
                             "session" : "Group",
                             "discipline" : "Kick-Boxing",
-                            "img" : "assets/images/selena-ortiz.png"
+                            "img" : "projet/assets/images/selena-ortiz.png"
                         },
                 
                         {
@@ -72,7 +72,7 @@
                             "experience" : 15,
                             "session" : "Private",
                             "discipline" : "Muay-Thai",
-                            "img" : "assets/images/noah-rasmussen.png"
+                            "img" : "/assets/images/noah-rasmussen.png"
                         },
                         
                         {
@@ -80,7 +80,7 @@
                             "experience" : 7,
                             "session" : "Group",
                             "discipline" : "Bjj no-gi",
-                            "img" : "assets/images/jade-moreau.png"
+                            "img" : "devweb01/projets-autonomes/projet01/assets/images/jade-moreau.png"
                         }
                     ]
                 }
