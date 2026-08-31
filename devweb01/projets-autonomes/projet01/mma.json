@@ -5,7 +5,7 @@
                 {
                     "disciplines": [
                         {
-                        "name":"Wrestling",
+                        "name":"WRESTLING",
                         "tagline":"Control the fight.",
                         "description":"Wrestling is the art of control, balance, and determination. It teaches athletes how to dictate where the fight takes place through powerful takedowns, positional dominance, and relentless pressure. At its core, wrestling develops discipline, resilience, and the mindset to never give up an advantageous position.",
                         "img": "https://res.cloudinary.com/fdssm8mg/image/upload/v1787171174/image_1.jpg"
@@ -60,7 +60,7 @@
                         },
                 
                         {
-                            "name" : "selena ortiz", 
+                            "name" : "Selena Ortiz", 
                             "experience" : 6,
                             "session" : "Group",
                             "discipline" : "Kick-Boxing",
