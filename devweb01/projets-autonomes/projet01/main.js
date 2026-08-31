@@ -1,3 +1,26 @@
+const header = document.querySelector("header");
+const heroWrapper = document.querySelector(".hero-wrapper");
+
+if (header && heroWrapper) {
+    header.classList.add("transparent");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.classList.remove("transparent");
+        } else { 
+            header.classList.add("transparent");
+        }
+    });
+}
+
+const menuButton = document.querySelector(".menu-button");
+const menu = document.querySelector(".menu");
+
+if (menu)
+  menuButton.addEventListener("click", () => {
+    menu.classList.toggle("open");
+});
+
 getApiInfo();
 
 async function getApiInfo() {
@@ -168,8 +191,9 @@ async function getApiInfo() {
 
         }
     
-        afficherData(disciplinesData, coachesData);
-    
+        if (disciplinesContainer && coachesContainer) {
+            afficherData(disciplinesData, coachesData);
+    }
    
     } catch (error) {
 
@@ -184,13 +208,36 @@ async function getApiInfo() {
 const form = document.querySelector("#join-form");
 const formResponse = document.querySelector("#form-response");
 
-/*form.addEventListener("submit", async (event) => {
+if (form) {
+    form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const data = new FormData(form);
 
-    const name = data.get("name").trim()
-    const email = get("email").trim();
+    const name = data.get("name").trim();
+    const email = data.get("email").trim();
     const discipline = data.get("discipline");
       
-      if (name.length < 2 || name.length > 100){}*/
+      if (name.length < 2 || name.length > 100){
+        formResponse.textContent = `Please enter a valid name. (min 2 characters)`;
+        formResponse.style.color = "red";
+        return;
+      }
+
+      if (!email.includes("@")) {
+        formResponse.textContent = `Please enter a valid email. (@)`;
+        formResponse.style.color ="red";
+        return;
+      }
+
+      if (!discipline) {
+        formResponse.textContent = "Please choose a discipline.";
+        formResponse.style.color = "red";
+        return;
+      }
+      
+      formResponse.textContent = `Thanks ${name}! We'll contact you soon about ${discipline}.`;
+      formResponse.style.color = "black";
+      form.reset();
+    });
+}
