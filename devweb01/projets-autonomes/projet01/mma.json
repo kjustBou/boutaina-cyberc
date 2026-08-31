@@ -40,7 +40,7 @@
                             "experience" : 12,
                             "session" : "Private",
                             "discipline" : "Wrestling",
-                            "img" : "assets/images/aiden-brooks.png"
+                            "img" : "/assets/images/Aiden-Brooks.png"
                         },
                 
                         {
@@ -48,7 +48,7 @@
                             "experience" : 8,
                             "session" : "Group",
                             "discipline" : "Muay-Thai",
-                            "img" : "assets/images/maya-tanaka.png"
+                            "img" : "/assets/images/Maya-Tanaka.png"
                 
                         },
                         {
