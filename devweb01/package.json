@@ -1,7 +1,6 @@
 {
-  "dependencies": {
-    "cheerio": "^1.2.0",
-    "express": "^5.2.1",
-    "node": "^26.5.1"
+  "name": "djb-studio",
+  "scripts": {
+    "start": "npx serve -s . -l $PORT"
   }
 }

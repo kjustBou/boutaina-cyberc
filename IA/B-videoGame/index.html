@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TurboDust — a cinematic nighttime driving experience."
+    />
+    <title>TurboDust — Night Drive</title>
+  </head>
+  <body data-app-status="loading" data-experience="waiting">
+    <canvas id="game-canvas" aria-label="TurboDust 3D scene"></canvas>
+    <div id="loading-status" role="status" aria-live="polite">
+      Preparing the night drive…
+    </div>
+    <main id="start-screen">
+      <div class="start-panel">
+        <p class="eyebrow">A TurboDust night drive</p>
+        <h1>Follow the horizon.</h1>
+        <p class="intro">
+          An endless road, an old machine, and nowhere you need to be.
+        </p>
+        <button id="start-drive" type="button" disabled>Preparing…</button>
+        <p id="start-status" class="start-status" aria-live="polite">
+          Loading vehicle and sound
+        </p>
+      </div>
+    </main>
+    <div id="drive-hint" aria-hidden="true">
+      <span>Arrow keys</span>
+      <span>Drive · steer · brake</span>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
