@@ -496,6 +496,7 @@ footer {
 .schedule-table t:nth-child(even) {
     background-color: var(--couleur-fond-clair);
 }
+
 @media (max-width: 768px) {
 
     .menu-button{
