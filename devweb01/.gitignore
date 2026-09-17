@@ -1,0 +1,5 @@
+# Dependencies installed locally; restore them with npm install.
+node_modules/
+
+# Build outputs generated locally.
+dist/
