@@ -8,9 +8,14 @@
       content="TurboDust — a cinematic nighttime driving experience."
     />
     <title>TurboDust — Night Drive</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
   <body data-app-status="loading" data-experience="waiting">
     <canvas id="game-canvas" aria-label="TurboDust 3D scene"></canvas>
+    <p id="keyboard-notice">
+      TurboDust needs a physical keyboard (arrow keys) to drive — it isn't
+      playable on a touchscreen yet. Please visit from a desktop browser.
+    </p>
     <div id="loading-status" role="status" aria-live="polite">
       Preparing the night drive…
     </div>
@@ -27,10 +32,27 @@
         </p>
       </div>
     </main>
+    <div id="hud" aria-hidden="true">
+      <div class="hud-dial">
+        <svg viewBox="-110 -110 220 220">
+          <circle class="hud-face" r="106" />
+          <g id="hud-ticks"></g>
+          <line id="hud-needle" x1="0" y1="16" x2="0" y2="-80" />
+          <circle class="hud-hub" r="7" />
+        </svg>
+        <div class="hud-readout">
+          <span id="hud-speed">0</span>
+          <small>km/h</small>
+        </div>
+      </div>
+      <div class="hud-rpm"><span id="hud-rpm-fill"></span></div>
+    </div>
     <div id="drive-hint" aria-hidden="true">
       <span>Arrow keys</span>
       <span>Drive · steer · brake</span>
+      <span>M · sound</span>
     </div>
+    <div id="mute-indicator" aria-live="polite">Sound off · press M</div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -58,14 +58,15 @@ function createRoadResources() {
       0.08,
       ROAD_SEGMENT_LENGTH + 0.12,
     ),
+    // Lighter blue-grey desert against darker asphalt, as in the moodboard.
     groundMaterial: new THREE.MeshStandardMaterial({
-      color: 0x070a10,
+      color: 0x1f2a3a,
       roughness: 1,
     }),
     roadMaterial: new THREE.MeshStandardMaterial({
-      color: 0x11151c,
-      roughness: 0.88,
-      metalness: 0.04,
+      color: 0x12161e,
+      roughness: 0.55,
+      metalness: 0.08,
     }),
     centerLineMaterial: new THREE.MeshStandardMaterial({
       color: 0x9b7939,

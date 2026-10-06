@@ -151,6 +151,36 @@ h1 {
   text-transform: uppercase;
 }
 
+/* (hover: none) and (pointer: coarse) together are the standard way to
+   detect a touchscreen-only device (no mouse, no hover), as opposed to a
+   touch-capable laptop that still has a keyboard. */
+#keyboard-notice {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #keyboard-notice {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    color: #edf5f8;
+    background: #02040d;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  #start-screen,
+  #hud,
+  #drive-hint,
+  #mute-indicator {
+    display: none;
+  }
+}
+
 #drive-hint {
   position: fixed;
   bottom: 1.35rem;
@@ -180,9 +210,149 @@ h1 {
   opacity: 1;
 }
 
+#mute-indicator {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 3;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgb(150 190 255 / 24%);
+  border-radius: 0.25rem;
+  color: #dbe9ff;
+  background: rgb(2 4 13 / 78%);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transition: opacity 250ms ease;
+}
+
+body[data-muted="true"] #mute-indicator {
+  opacity: 1;
+}
+
+#hud {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1;
+  width: clamp(9rem, 20vw, 13.5rem);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms ease 600ms;
+}
+
+body[data-experience="running"] #hud {
+  opacity: 1;
+}
+
+.hud-dial {
+  position: relative;
+}
+
+.hud-dial svg {
+  display: block;
+  width: 100%;
+  filter: drop-shadow(0 0 18px rgb(255 70 40 / 14%));
+}
+
+.hud-face {
+  fill: rgb(5 11 18 / 74%);
+  stroke: rgb(185 219 224 / 30%);
+  stroke-width: 1.5;
+}
+
+.hud-tick {
+  stroke: rgb(170 195 205 / 55%);
+  stroke-width: 1;
+}
+
+.hud-tick.is-major {
+  stroke: rgb(225 238 242 / 90%);
+  stroke-width: 2;
+}
+
+.hud-tick.is-redline {
+  stroke: #ff5a3c;
+}
+
+.hud-label {
+  fill: rgb(215 228 233 / 85%);
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.hud-label.is-redline {
+  fill: #ff7a5c;
+}
+
+#hud-needle {
+  stroke: #ff3b22;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgb(255 59 34 / 80%));
+}
+
+.hud-hub {
+  fill: #0a1218;
+  stroke: #ff3b22;
+  stroke-width: 2;
+}
+
+.hud-readout {
+  position: absolute;
+  right: 0;
+  bottom: 17%;
+  left: 0;
+  text-align: center;
+  color: #ffb14a;
+  text-shadow: 0 0 12px rgb(255 150 40 / 55%);
+}
+
+#hud-speed {
+  font-family: "Courier New", monospace;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.hud-readout small {
+  margin-left: 0.25rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  opacity: 0.75;
+  text-transform: uppercase;
+}
+
+.hud-rpm {
+  width: 70%;
+  height: 3px;
+  margin: 0.55rem auto 0;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 12%);
+}
+
+#hud-rpm-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #4fd1c5, #ffb14a 70%, #ff3b22);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
 @media (max-width: 36rem) {
   #start-screen {
     padding: 1rem;
+  }
+
+  #hud {
+    right: 0.9rem;
+    bottom: 3rem;
   }
 
   #drive-hint {
@@ -195,6 +365,7 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   #start-screen,
   #drive-hint,
+  #hud,
   #loading-status {
     transition-duration: 1ms;
   }

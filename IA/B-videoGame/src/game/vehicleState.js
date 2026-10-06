@@ -1,23 +1,23 @@
 import { ROAD_BOUNDS } from "../config/road.js";
 
 export const VEHICLE_CONFIG = Object.freeze({
-  maxForwardSpeed: 24,
+  maxForwardSpeed: 40,
   maxReverseSpeed: 6,
-  forwardAcceleration: 5.2,
-  reverseAcceleration: 3,
-  brakeDeceleration: 9,
+  forwardAcceleration: 11,
+  reverseAcceleration: 4,
+  brakeDeceleration: 18,
   coastDeceleration: 1.25,
   aerodynamicDrag: 0.0025,
-  throttleResponse: 2.4,
-  brakeResponse: 5,
-  steeringResponse: 2.8,
-  steeringReturn: 3.8,
+  throttleResponse: 4.5,
+  brakeResponse: 8,
+  steeringResponse: 3.8,
+  steeringReturn: 4.8,
   maxYawRate: 0.52,
   idleRpm: 850,
   maxRpm: 6500,
 });
 
-export function createVehicleState({ x = 2.6, z = 0 } = {}) {
+export function createVehicleState({ x = 4.5, z = 0 } = {}) {
   return {
     position: { x, z },
     heading: 0,

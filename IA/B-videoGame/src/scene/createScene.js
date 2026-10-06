@@ -1,11 +1,14 @@
 import * as THREE from "three";
 
-const BACKGROUND_COLOR = 0x02040d;
+const ZENITH_COLOR = "#02040d";
+const HORIZON_COLOR = "#0a1626";
 
+// The fog uses the horizon colour, so distant ground fades into the sky
+// instead of ending in a visible edge.
 export function createScene(canvas) {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(BACKGROUND_COLOR);
-  scene.fog = new THREE.Fog(BACKGROUND_COLOR, 42, 205);
+  scene.background = createSkyGradient();
+  scene.fog = new THREE.Fog(HORIZON_COLOR, 42, 205);
 
   const camera = new THREE.PerspectiveCamera(
     48,
@@ -25,7 +28,7 @@ export function createScene(canvas) {
   renderer.setSize(window.innerWidth, window.innerHeight, false);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.88;
+  renderer.toneMappingExposure = 1;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFShadowMap;
 
@@ -50,6 +53,25 @@ export function createScene(canvas) {
       renderer.dispose();
     },
   };
+}
+
+// A tall 1px-wide canvas stretched over the screen: deep navy at the top,
+// fading to the horizon colour around a third of the way down.
+function createSkyGradient() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 2;
+  canvas.height = 256;
+  const context = canvas.getContext("2d");
+  const gradient = context.createLinearGradient(0, 0, 0, canvas.height);
+  gradient.addColorStop(0, ZENITH_COLOR);
+  gradient.addColorStop(0.36, HORIZON_COLOR);
+  gradient.addColorStop(1, HORIZON_COLOR);
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
 }
 
 function addNightLighting(scene) {

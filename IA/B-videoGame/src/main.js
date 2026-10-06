@@ -3,7 +3,9 @@ import * as THREE from "three";
 import { createAudioSystem } from "./audio/createAudioSystem.js";
 import { applyVehicleTransform } from "./game/applyVehicleTransform.js";
 import { createChaseCamera } from "./game/createChaseCamera.js";
+import { createDustTrail } from "./game/createDustTrail.js";
 import { createKeyboardInput } from "./game/createKeyboardInput.js";
+import { createSuspensionBob } from "./game/createSuspensionBob.js";
 import {
   createVehicleState,
   updateVehicleState,
@@ -13,6 +15,7 @@ import { createRoad } from "./scene/createRoad.js";
 import { createNightEnvironment } from "./scene/createNightEnvironment.js";
 import { createVehicleLights } from "./scene/createVehicleLights.js";
 import { loadKimera } from "./scene/loadKimera.js";
+import { createHud } from "./ui/createHud.js";
 import { createStartExperience } from "./ui/createStartExperience.js";
 
 const canvas = document.querySelector("#game-canvas");
@@ -23,15 +26,26 @@ timer.connect(document);
 const keyboard = createKeyboardInput();
 const vehicleState = createVehicleState();
 const chaseCamera = createChaseCamera(camera);
+const suspension = createSuspensionBob();
+const dustTrail = createDustTrail();
 const road = createRoad();
 const nightEnvironment = createNightEnvironment();
 const audioSystem = createAudioSystem();
 const startExperience = createStartExperience();
+const hud = createHud();
 let vehicleModel = null;
 let wheelRig = null;
 let vehicleLights = null;
 
-scene.add(road.object, nightEnvironment.object);
+scene.add(road.object, nightEnvironment.object, dustTrail.object);
+
+// M toggles the sound. The page shows a small "Sound off" label through the
+// data-muted attribute, the same way the start screen is driven by
+// data-experience.
+window.addEventListener("keydown", (event) => {
+  if (event.code !== "KeyM" || event.repeat) return;
+  document.body.dataset.muted = String(audioSystem.toggleMute());
+});
 
 try {
   const [loadedVehicle] = await Promise.all([
@@ -74,15 +88,18 @@ renderer.setAnimationLoop((timestamp) => {
     if (startExperience.state.started) {
       updateVehicleState(vehicleState, keyboard.state, deltaTime);
     }
-    applyVehicleTransform(vehicleModel, vehicleState);
+    const suspensionState = suspension.update(vehicleState, deltaTime);
+    applyVehicleTransform(vehicleModel, vehicleState, suspensionState);
     wheelRig.update(vehicleState, deltaTime);
     vehicleLights.update(vehicleState);
     chaseCamera.update(vehicleState, deltaTime);
     audioSystem.update(vehicleState);
+    hud.update(vehicleState);
+    dustTrail.update(vehicleState, deltaTime);
   }
 
   road.update(vehicleState.position.z);
-  nightEnvironment.update(vehicleState.position.z);
+  nightEnvironment.update(vehicleState.position.z, timer.getElapsed());
   updateLighting(vehicleState);
 
   renderer.render(scene, camera);

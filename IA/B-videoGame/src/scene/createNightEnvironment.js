@@ -26,8 +26,9 @@ export function createNightEnvironment() {
     visibleInstances: 0,
   };
 
-  function update(vehicleZ, force = false) {
+  function update(vehicleZ, elapsed = 0, force = false) {
     skyAnchor.position.z = vehicleZ;
+    skyAnchor.userData.updateAurora(elapsed);
 
     const centerSegment = Math.floor(vehicleZ / ROAD_SEGMENT_LENGTH);
     if (!force && centerSegment === state.centerSegment) return;
@@ -49,7 +50,7 @@ export function createNightEnvironment() {
     state.recycledSegments += 1;
   }
 
-  update(0, true);
+  update(0, 0, true);
   return { object, update, state };
 }
 
@@ -83,11 +84,11 @@ function createSkyAnchor() {
   const stars = new THREE.Points(
     starGeometry,
     new THREE.PointsMaterial({
-      size: 0.2,
+      size: 0.32,
       sizeAttenuation: true,
       vertexColors: true,
       transparent: true,
-      opacity: 0.9,
+      opacity: 1,
       depthWrite: false,
       fog: false,
     }),
@@ -95,28 +96,31 @@ function createSkyAnchor() {
   stars.name = "Procedural stars";
   anchor.add(stars);
 
-  const skyGlow = new THREE.Mesh(
-    new THREE.PlaneGeometry(190, 58),
+  const aurora = createAurora();
+  anchor.add(aurora.object, createHorizonGlow(), createDistantRidge());
+  anchor.userData.updateAurora = aurora.update;
+
+  const moonGlow = new THREE.Mesh(
+    new THREE.CircleGeometry(11, 32),
     new THREE.MeshBasicMaterial({
-      map: createSkyGlowTexture(),
+      map: createRadialGlowTexture(),
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.5,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
       fog: false,
     }),
   );
-  skyGlow.name = "Faint aurora haze";
-  skyGlow.position.set(10, 42, 155);
-  anchor.add(skyGlow);
+  moonGlow.name = "Moon glow";
+  moonGlow.position.set(-52, 43, 151);
+  anchor.add(moonGlow);
 
   const moon = new THREE.Mesh(
     new THREE.CircleGeometry(3.2, 32),
     new THREE.MeshBasicMaterial({
-      color: 0xb7d3e8,
+      color: 0xd6e6f2,
       transparent: true,
-      opacity: 0.58,
+      opacity: 0.85,
       depthWrite: false,
       fog: false,
       side: THREE.DoubleSide,
@@ -129,22 +133,140 @@ function createSkyAnchor() {
   return anchor;
 }
 
-function createSkyGlowTexture() {
+// The aurora is a few flat planes. Each is painted with a canvas texture of
+// vertical "rays" (green on the bright lower edge, magenta higher up), and
+// additive blending makes them glow. update() slowly sways and pulses them.
+function createAurora() {
+  const object = new THREE.Group();
+  object.name = "Aurora curtains";
+
+  const curtains = [
+    { x: 25, y: 44, z: 158, width: 220, height: 58, opacity: 0.55, seed: 11 },
+    { x: -45, y: 52, z: 168, width: 190, height: 50, opacity: 0.38, seed: 23 },
+    { x: 75, y: 36, z: 150, width: 170, height: 42, opacity: 0.32, seed: 37 },
+  ].map((config) => {
+    const mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(config.width, config.height),
+      new THREE.MeshBasicMaterial({
+        map: createAuroraTexture(config.seed),
+        transparent: true,
+        opacity: config.opacity,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        side: THREE.DoubleSide,
+        fog: false,
+      }),
+    );
+    mesh.position.set(config.x, config.y, config.z);
+    mesh.rotation.y = (config.seed % 5) * 0.03 - 0.06;
+    object.add(mesh);
+    return { mesh, config };
+  });
+
+  function update(elapsed) {
+    curtains.forEach(({ mesh, config }, index) => {
+      mesh.position.x = config.x + Math.sin(elapsed * 0.05 + index * 2) * 9;
+      mesh.material.opacity =
+        config.opacity * (0.72 + 0.28 * Math.sin(elapsed * 0.35 + index * 1.7));
+    });
+  }
+
+  return { object, update };
+}
+
+function createAuroraTexture(seed) {
+  const random = createRandom(seed);
   const canvas = document.createElement("canvas");
-  canvas.width = 256;
+  canvas.width = 512;
+  canvas.height = 256;
+  const context = canvas.getContext("2d");
+  const phaseA = random() * Math.PI * 2;
+  const phaseB = random() * Math.PI * 2;
+
+  for (let x = 0; x < canvas.width; x += 2) {
+    const u = x / canvas.width;
+    // Two sine waves multiplied together give irregular vertical rays.
+    const ray = 0.5 + 0.5 * Math.sin(u * 38 + phaseA) * Math.sin(u * 11 + phaseB);
+    const strength = Math.min(1, ray * 1.6 * Math.sin(u * Math.PI) + 0.12);
+    const gradient = context.createLinearGradient(0, canvas.height, 0, 0);
+    gradient.addColorStop(0, "rgba(60, 255, 150, 0)");
+    gradient.addColorStop(0.12, `rgba(30, 235, 130, ${strength})`);
+    gradient.addColorStop(0.5, `rgba(15, 170, 105, ${0.5 * strength})`);
+    gradient.addColorStop(0.8, `rgba(200, 40, 130, ${0.45 * strength})`);
+    gradient.addColorStop(1, "rgba(120, 30, 120, 0)");
+    context.fillStyle = gradient;
+    context.fillRect(x, 0, 2, canvas.height);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
+// The last light of sunset: a wide, low band of orange fading into teal.
+function createHorizonGlow() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 8;
   canvas.height = 128;
   const context = canvas.getContext("2d");
-  const gradient = context.createLinearGradient(0, 0, 0, canvas.height);
-  gradient.addColorStop(0, "rgba(22, 118, 118, 0)");
-  gradient.addColorStop(0.35, "rgba(31, 124, 112, 0.7)");
-  gradient.addColorStop(0.62, "rgba(84, 37, 96, 0.35)");
-  gradient.addColorStop(1, "rgba(5, 10, 28, 0)");
+  const gradient = context.createLinearGradient(0, canvas.height, 0, 0);
+  gradient.addColorStop(0, "rgba(235, 115, 60, 0.75)");
+  gradient.addColorStop(0.3, "rgba(150, 70, 80, 0.4)");
+  gradient.addColorStop(0.65, "rgba(30, 110, 125, 0.18)");
+  gradient.addColorStop(1, "rgba(10, 30, 60, 0)");
   context.fillStyle = gradient;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
-  return texture;
+  const glow = new THREE.Mesh(
+    new THREE.PlaneGeometry(420, 34),
+    new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      opacity: 0.9,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide,
+      fog: false,
+    }),
+  );
+  glow.name = "Horizon glow";
+  glow.position.set(0, 16, 205);
+  return glow;
+}
+
+// A static ridge of far mountains that travels with the sky, so the horizon
+// always has a silhouette against the glow.
+function createDistantRidge() {
+  const random = createRandom(9001);
+  const ridge = new THREE.Group();
+  ridge.name = "Distant ridge";
+  const geometry = new THREE.ConeGeometry(1, 1, 6);
+  const material = new THREE.MeshBasicMaterial({ color: 0x070d18, fog: false });
+
+  for (let x = -200; x <= 200; x += 24) {
+    const radius = 12 + random() * 12;
+    const height = 8 + random() * 14;
+    const mountain = new THREE.Mesh(geometry, material);
+    mountain.scale.set(radius * 1.4, height, radius);
+    mountain.position.set(x + random() * 10, height / 2 - 0.6, 190 + random() * 8);
+    ridge.add(mountain);
+  }
+  return ridge;
+}
+
+function createRadialGlowTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 128;
+  const context = canvas.getContext("2d");
+  const gradient = context.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gradient.addColorStop(0, "rgba(170, 205, 235, 0.55)");
+  gradient.addColorStop(1, "rgba(170, 205, 235, 0)");
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(context.canvas);
 }
 
 function createSceneryResources() {
@@ -156,6 +278,10 @@ function createSceneryResources() {
     palmTrunkGeometry: new THREE.CylinderGeometry(0.07, 0.12, 1, 6),
     palmCrownGeometry: new THREE.ConeGeometry(1, 0.55, 7),
     buildingGeometry: new THREE.BoxGeometry(1, 1, 1),
+    cactusTrunkGeometry: new THREE.CylinderGeometry(0.15, 0.18, 1, 6),
+    cactusArmGeometry: new THREE.CylinderGeometry(0.11, 0.12, 1, 6),
+    cactusLinkGeometry: new THREE.BoxGeometry(1, 1, 1),
+    cactusMaterial: new THREE.MeshBasicMaterial({ color: 0x08110f }),
     mountainMaterial: new THREE.MeshBasicMaterial({ color: 0x080b13 }),
     rockMaterial: new THREE.MeshStandardMaterial({
       color: 0x14141a,
@@ -218,6 +344,24 @@ function createScenerySegment(resources) {
     5,
   );
 
+  // A cactus = one trunk, plus two arms (each a short horizontal link and a
+  // vertical piece), so it needs 1 / 2 / 2 instances per cactus.
+  const cactusTrunks = createInstances(
+    resources.cactusTrunkGeometry,
+    resources.cactusMaterial,
+    3,
+  );
+  const cactusLinks = createInstances(
+    resources.cactusLinkGeometry,
+    resources.cactusMaterial,
+    6,
+  );
+  const cactusArms = createInstances(
+    resources.cactusArmGeometry,
+    resources.cactusMaterial,
+    6,
+  );
+
   object.add(
     mountains,
     rocks,
@@ -227,6 +371,9 @@ function createScenerySegment(resources) {
     palmCrowns,
     buildings,
     cityLights,
+    cactusTrunks,
+    cactusLinks,
+    cactusArms,
   );
 
   function populate(worldSegment) {
@@ -257,7 +404,7 @@ function createScenerySegment(resources) {
       setInstance(
         rocks,
         index,
-        side * (7.3 + random() * 15),
+        side * (10.3 + random() * 15),
         size * 0.42,
         localZ(random),
         size * (0.8 + random() * 0.7),
@@ -273,7 +420,7 @@ function createScenerySegment(resources) {
     poleLights.count = poleCount;
     for (let index = 0; index < poleCount; index += 1) {
       const side = index === 0 ? -1 : 1;
-      const x = side * (7.2 + random() * 1.5);
+      const x = side * (10.2 + random() * 1.5);
       const z = localZ(random);
       const height = 4 + random() * 1.8;
       setInstance(poles, index, x, height / 2, z, 1, height, 1);
@@ -286,7 +433,7 @@ function createScenerySegment(resources) {
     palmCrowns.count = palmCount;
     for (let index = 0; index < palmCount; index += 1) {
       const side = random() < 0.5 ? -1 : 1;
-      const x = side * (10 + random() * 9);
+      const x = side * (13 + random() * 9);
       const z = localZ(random);
       const height = 4.5 + random() * 2.8;
       setInstance(palmTrunks, index, x, height / 2, z, 1, height, 1);
@@ -307,6 +454,31 @@ function createScenerySegment(resources) {
     }
     visibleInstances += buildingCount * 2;
 
+    for (let index = 0; index < cactusTrunks.count; index += 1) {
+      const side = random() < 0.5 ? -1 : 1;
+      const x = side * (12 + random() * 20);
+      const z = localZ(random);
+      const height = 1.8 + random() * 1.6;
+      setInstance(cactusTrunks, index, x, height / 2, z, 1, height, 1);
+
+      for (const armSide of [-1, 1]) {
+        const arm = index * 2 + (armSide === -1 ? 0 : 1);
+        const armHeight = height * (0.22 + random() * 0.25);
+        setInstance(cactusLinks, arm, x + armSide * 0.22, height * 0.45, z, 0.44, 0.12, 0.12);
+        setInstance(
+          cactusArms,
+          arm,
+          x + armSide * 0.42,
+          height * 0.45 + armHeight / 2,
+          z,
+          1,
+          armHeight,
+          1,
+        );
+      }
+    }
+    visibleInstances += cactusTrunks.count * 5;
+
     for (const mesh of [
       mountains,
       rocks,
@@ -316,6 +488,9 @@ function createScenerySegment(resources) {
       palmCrowns,
       buildings,
       cityLights,
+      cactusTrunks,
+      cactusLinks,
+      cactusArms,
     ]) {
       mesh.instanceMatrix.needsUpdate = true;
       mesh.computeBoundingSphere();

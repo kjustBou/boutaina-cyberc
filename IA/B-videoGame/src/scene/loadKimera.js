@@ -1,5 +1,9 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+// The model file is compressed with meshopt (via gltf-transform, a one-off
+// build step — see docs/project-plan.md) to cut its size from 26.7 MB to
+// 3.4 MB. This decoder, shipped with three.js itself, unpacks it at load time.
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { createWheelRig } from "../game/createWheelRig.js";
 
 const KIMERA_URL = new URL(
@@ -40,6 +44,7 @@ const WHEEL_DEFINITIONS = [
 
 export async function loadKimera() {
   const loader = new GLTFLoader();
+  loader.setMeshoptDecoder(MeshoptDecoder);
   const gltf = await loader.loadAsync(KIMERA_URL);
   const model = gltf.scene;
   model.name = "Kimera EVO37";
